@@ -10,9 +10,9 @@ public class TestInstaller : MonoInstaller
 		Container.Bind<Foo>().AsSingle().OnInstantiated<Foo>(OnFooInstantiated);
 	}
 
-	
 
-void OnFooInstantiated(InjectContext context, Foo foo)
+
+	void OnFooInstantiated(InjectContext context, Foo foo)
 	{
 		foo.Qux = "asdf";
 
@@ -27,7 +27,15 @@ public class Foo
 
 public class Greeter
 {
-	[Inject] Foo foo;
+	//[Inject] Foo foo;
+
+	Foo _foo;
+
+	[Inject]
+	private void Abc(Foo foo)
+	{
+		_foo = foo;
+	}
 
 	public Greeter(string message)
 	{
